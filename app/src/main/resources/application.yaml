@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: family-food-note
+  datasource:
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+
+app:
+  secret: ${APP_SECRET}
+  lifetime: 600000
+
+logging:
+  level:
+    org.springframework.security: INFO

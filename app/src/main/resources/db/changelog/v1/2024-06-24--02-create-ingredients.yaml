@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: asarychev
+      changes:
+        - createTable:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    autoIncrement: true
+              - column:
+                  name: recipe_id
+                  type: integer
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: quantity
+                  type: integer
+              - column:
+                  name: unit
+                  type: varchar(20)
+        - addForeignKeyConstraint:
+            baseColumnNames: recipe_id
+            baseTableName: ingredients
+            constraintName: fk_ingredients_recipes
+            referencedTableName: recipes
+            referencedColumnNames: id

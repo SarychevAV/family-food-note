@@ -1,0 +1,167 @@
+openapi: 3.0.0
+info:
+  title: Recipe API
+  version: 1.0.0
+  description: API for managing user-created recipes with ingredients and steps
+
+servers:
+  - url: http://localhost:8080/v1
+
+paths:
+  /recipes:
+    get:
+      summary: Получить список рецептов
+      operationId: getAllRecipes
+      responses:
+        '200':
+          description: Список рецептов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+
+    post:
+      summary: Создать рецепт
+      operationId: createRecipe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+      responses:
+        '201':
+          description: Рецепт успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+
+  /recipes/{recipeId}:
+    get:
+      summary: Получить рецепт по ID
+      operationId: getRecipeById
+      parameters:
+        - name: recipeId
+          in: path
+          required: true
+          description: ID рецепта
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Рецепт
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        '404':
+          description: Рецепт не найден
+
+  /ingredients:
+    get:
+      summary: Получить все ингредиенты
+      operationId: getAllIngredients
+      responses:
+        '200':
+          description: Список ингредиентов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ingredient'
+
+    post:
+      summary: Создать новый ингредиент
+      operationId: createIngredient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ingredient'
+      responses:
+        '201':
+          description: Ингредиент создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredient'
+
+  /steps:
+    get:
+      summary: Получить список шагов
+      operationId: getAllSteps
+      responses:
+        '200':
+          description: Список шагов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Step'
+
+    post:
+      summary: Создать новый шаг
+      operationId: createStep
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Step'
+      responses:
+        '201':
+          description: Шаг создан успешно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Step'
+
+components:
+  schemas:
+    Recipe:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+
+    Ingredient:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        quantity:
+          type: string
+        recipe_id:
+          type: integer
+
+    Step:
+      type: object
+      properties:
+        id:
+          type: integer
+        description:
+          type: string
+        sequence:
+          type: integer
+        recipe_id:
+          type: integer

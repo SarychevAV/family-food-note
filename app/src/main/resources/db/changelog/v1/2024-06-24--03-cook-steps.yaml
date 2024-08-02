@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: asarychev
+      changes:
+        - createTable:
+            tableName: cook_steps
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    autoIncrement: true
+              - column:
+                  name: recipe_id
+                  type: integer
+              - column:
+                  name: step_number
+                  type: integer
+              - column:
+                  name: description
+                  type: varchar(255)
+        - addForeignKeyConstraint:
+            baseColumnNames: recipe_id
+            baseTableName: cook_steps
+            constraintName: fk_cook_steps_recipes
+            referencedTableName: recipes
+            referencedColumnNames: id
