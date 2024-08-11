@@ -4,7 +4,7 @@ databaseChangeLog:
       author: asarychev
       changes:
         - createTable:
-            tableName: cook_steps
+            tableName: recipe
             columns:
               - column:
                   name: id
@@ -14,17 +14,17 @@ databaseChangeLog:
                     nullable: false
                     autoIncrement: true
               - column:
-                  name: recipe_id
+                  name: author
                   type: integer
               - column:
-                  name: step_number
-                  type: integer
+                  name: title
+                  type: varchar(50)
               - column:
                   name: description
                   type: varchar(255)
         - addForeignKeyConstraint:
-            baseColumnNames: recipe_id
-            baseTableName: cook_steps
-            constraintName: fk_cook_steps_recipes
-            referencedTableName: recipes
+            baseColumnNames: author
+            baseTableName: recipe
+            constraintName: fk_author
+            referencedTableName: users
             referencedColumnNames: id

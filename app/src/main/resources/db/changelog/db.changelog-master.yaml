@@ -2,8 +2,8 @@ databaseChangeLog:
   - include:
       file: db/changelog/v1/2024-06-10--01-create-users.yaml
   - include:
-      file: db/changelog/v1/2024-06-24--01-create-recipes.yaml
+      file: db/changelog/v1/2024-06-24--01-create-recipe.yaml
   - include:
-      file: db/changelog/v1/2024-06-24--02-create-ingredients.yaml
+      file: db/changelog/v1/2024-06-24--02-create-ingredient.yaml
   - include:
-      file: db/changelog/v1/2024-06-24--03-cook-steps.yaml
+      file: db/changelog/v1/2024-06-24--03-cook-step.yaml

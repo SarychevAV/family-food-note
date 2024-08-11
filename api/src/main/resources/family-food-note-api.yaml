@@ -20,7 +20,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Recipe'
+                  $ref: '#/components/schemas/RecipeDto'
 
     post:
       summary: Создать рецепт
@@ -30,14 +30,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Recipe'
+              $ref: '#/components/schemas/RecipeDto'
       responses:
         '201':
           description: Рецепт успешно создан
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Recipe'
+                $ref: '#/components/schemas/RecipeDto'
 
   /recipes/{recipeId}:
     get:
@@ -56,75 +56,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Recipe'
+                $ref: '#/components/schemas/RecipeDto'
         '404':
           description: Рецепт не найден
-
-  /ingredients:
-    get:
-      summary: Получить все ингредиенты
-      operationId: getAllIngredients
-      responses:
-        '200':
-          description: Список ингредиентов
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Ingredient'
-
-    post:
-      summary: Создать новый ингредиент
-      operationId: createIngredient
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Ingredient'
-      responses:
-        '201':
-          description: Ингредиент создан
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Ingredient'
-
-  /steps:
-    get:
-      summary: Получить список шагов
-      operationId: getAllSteps
-      responses:
-        '200':
-          description: Список шагов
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Step'
-
-    post:
-      summary: Создать новый шаг
-      operationId: createStep
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Step'
-      responses:
-        '201':
-          description: Шаг создан успешно
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Step'
-
 components:
   schemas:
-    Recipe:
+    RecipeDto:
       type: object
       properties:
         id:
@@ -136,13 +73,13 @@ components:
         ingredients:
           type: array
           items:
-            $ref: '#/components/schemas/Ingredient'
+            $ref: '#/components/schemas/IngredientDto'
         steps:
           type: array
           items:
-            $ref: '#/components/schemas/Step'
+            $ref: '#/components/schemas/StepDto'
 
-    Ingredient:
+    IngredientDto:
       type: object
       properties:
         id:
@@ -154,7 +91,7 @@ components:
         recipe_id:
           type: integer
 
-    Step:
+    StepDto:
       type: object
       properties:
         id:
